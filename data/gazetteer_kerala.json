@@ -1,0 +1,457 @@
+[
+  {
+    "name": "Chengannur",
+    "district": "Alappuzha",
+    "lat": 9.3176,
+    "lon": 76.6112,
+    "category": "Town"
+  },
+  {
+    "name": "College of Engineering Chengannur",
+    "district": "Alappuzha",
+    "lat": 9.3168,
+    "lon": 76.6186,
+    "category": "Educational Institution"
+  },
+  {
+    "name": "Chengannur Railway Station",
+    "district": "Alappuzha",
+    "lat": 9.3185,
+    "lon": 76.6135,
+    "category": "Transit Hub"
+  },
+  {
+    "name": "Chengannur KSRTC Bus Stand",
+    "district": "Alappuzha",
+    "lat": 9.315,
+    "lon": 76.614,
+    "category": "Transit Hub"
+  },
+  {
+    "name": "Alappuzha",
+    "district": "Alappuzha",
+    "lat": 9.4981,
+    "lon": 76.3388,
+    "category": "District HQ"
+  },
+  {
+    "name": "Alappuzha Beach",
+    "district": "Alappuzha",
+    "lat": 9.4925,
+    "lon": 76.318,
+    "category": "Tourist Location"
+  },
+  {
+    "name": "Alappuzha KSRTC Bus Station",
+    "district": "Alappuzha",
+    "lat": 9.493,
+    "lon": 76.335,
+    "category": "Transit Hub"
+  },
+  {
+    "name": "Mavelikkara",
+    "district": "Alappuzha",
+    "lat": 9.2667,
+    "lon": 76.55,
+    "category": "Town"
+  },
+  {
+    "name": "Kayamkulam",
+    "district": "Alappuzha",
+    "lat": 9.1725,
+    "lon": 76.4998,
+    "category": "Town"
+  },
+  {
+    "name": "Cherthala",
+    "district": "Alappuzha",
+    "lat": 9.6843,
+    "lon": 76.3364,
+    "category": "Town"
+  },
+  {
+    "name": "Haripad",
+    "district": "Alappuzha",
+    "lat": 9.2842,
+    "lon": 76.4633,
+    "category": "Town"
+  },
+  {
+    "name": "Ambalapuzha",
+    "district": "Alappuzha",
+    "lat": 9.3789,
+    "lon": 76.3615,
+    "category": "Town"
+  },
+  {
+    "name": "Pathanamthitta",
+    "district": "Pathanamthitta",
+    "lat": 9.2648,
+    "lon": 76.787,
+    "category": "District HQ"
+  },
+  {
+    "name": "Adoor",
+    "district": "Pathanamthitta",
+    "lat": 9.155,
+    "lon": 76.732,
+    "category": "Town"
+  },
+  {
+    "name": "Thiruvalla",
+    "district": "Pathanamthitta",
+    "lat": 9.3835,
+    "lon": 76.574,
+    "category": "Town"
+  },
+  {
+    "name": "Thiruvalla Railway Station",
+    "district": "Pathanamthitta",
+    "lat": 9.385,
+    "lon": 76.578,
+    "category": "Transit Hub"
+  },
+  {
+    "name": "Pandalam",
+    "district": "Pathanamthitta",
+    "lat": 9.2312,
+    "lon": 76.6841,
+    "category": "Town"
+  },
+  {
+    "name": "Aranmula",
+    "district": "Pathanamthitta",
+    "lat": 9.3082,
+    "lon": 76.6853,
+    "category": "Heritage Town"
+  },
+  {
+    "name": "Kozhencherry",
+    "district": "Pathanamthitta",
+    "lat": 9.336,
+    "lon": 76.708,
+    "category": "Town"
+  },
+  {
+    "name": "Kochi",
+    "district": "Ernakulam",
+    "lat": 9.9312,
+    "lon": 76.2673,
+    "category": "Major City"
+  },
+  {
+    "name": "Ernakulam",
+    "district": "Ernakulam",
+    "lat": 9.9816,
+    "lon": 76.2999,
+    "category": "District HQ"
+  },
+  {
+    "name": "MG Road Kochi",
+    "district": "Ernakulam",
+    "lat": 9.972,
+    "lon": 76.284,
+    "category": "Commercial Hub"
+  },
+  {
+    "name": "Marine Drive Kochi",
+    "district": "Ernakulam",
+    "lat": 9.979,
+    "lon": 76.276,
+    "category": "Public Promenade"
+  },
+  {
+    "name": "Edappally",
+    "district": "Ernakulam",
+    "lat": 10.0236,
+    "lon": 76.3116,
+    "category": "Transit & Retail Hub"
+  },
+  {
+    "name": "Lulu Mall Kochi",
+    "district": "Ernakulam",
+    "lat": 10.027,
+    "lon": 76.308,
+    "category": "Commercial Hub"
+  },
+  {
+    "name": "Infopark Kakkanad",
+    "district": "Ernakulam",
+    "lat": 10.012,
+    "lon": 76.362,
+    "category": "Tech Corridor"
+  },
+  {
+    "name": "Vyttila Mobility Hub",
+    "district": "Ernakulam",
+    "lat": 9.9675,
+    "lon": 76.321,
+    "category": "Transit Hub"
+  },
+  {
+    "name": "Fort Kochi",
+    "district": "Ernakulam",
+    "lat": 9.9658,
+    "lon": 76.2428,
+    "category": "Tourist Zone"
+  },
+  {
+    "name": "Aluva",
+    "district": "Ernakulam",
+    "lat": 10.1076,
+    "lon": 76.3516,
+    "category": "Transit Hub"
+  },
+  {
+    "name": "Thiruvananthapuram",
+    "district": "Thiruvananthapuram",
+    "lat": 8.5241,
+    "lon": 76.9366,
+    "category": "State Capital"
+  },
+  {
+    "name": "Thampanoor",
+    "district": "Thiruvananthapuram",
+    "lat": 8.487,
+    "lon": 76.9525,
+    "category": "Transit Hub"
+  },
+  {
+    "name": "East Fort",
+    "district": "Thiruvananthapuram",
+    "lat": 8.484,
+    "lon": 76.945,
+    "category": "Transit & Heritage"
+  },
+  {
+    "name": "Kazhakkoottam",
+    "district": "Thiruvananthapuram",
+    "lat": 8.5685,
+    "lon": 76.871,
+    "category": "Town"
+  },
+  {
+    "name": "Technopark Trivandrum",
+    "district": "Thiruvananthapuram",
+    "lat": 8.558,
+    "lon": 76.881,
+    "category": "Tech Corridor"
+  },
+  {
+    "name": "Kovalam Beach",
+    "district": "Thiruvananthapuram",
+    "lat": 8.4,
+    "lon": 76.978,
+    "category": "Tourist Location"
+  },
+  {
+    "name": "Kottayam",
+    "district": "Kottayam",
+    "lat": 9.5916,
+    "lon": 76.5222,
+    "category": "District HQ"
+  },
+  {
+    "name": "Changanassery",
+    "district": "Kottayam",
+    "lat": 9.4445,
+    "lon": 76.541,
+    "category": "Town"
+  },
+  {
+    "name": "Pala",
+    "district": "Kottayam",
+    "lat": 9.711,
+    "lon": 76.683,
+    "category": "Town"
+  },
+  {
+    "name": "Ettumanoor",
+    "district": "Kottayam",
+    "lat": 9.667,
+    "lon": 76.562,
+    "category": "Town"
+  },
+  {
+    "name": "Kollam",
+    "district": "Kollam",
+    "lat": 8.8932,
+    "lon": 76.6141,
+    "category": "District HQ"
+  },
+  {
+    "name": "Karunagappally",
+    "district": "Kollam",
+    "lat": 9.054,
+    "lon": 76.536,
+    "category": "Town"
+  },
+  {
+    "name": "Kottarakkara",
+    "district": "Kollam",
+    "lat": 8.998,
+    "lon": 76.772,
+    "category": "Town"
+  },
+  {
+    "name": "Thrissur",
+    "district": "Thrissur",
+    "lat": 10.5276,
+    "lon": 76.2144,
+    "category": "District HQ"
+  },
+  {
+    "name": "Swaraj Round Thrissur",
+    "district": "Thrissur",
+    "lat": 10.524,
+    "lon": 76.214,
+    "category": "Commercial Hub"
+  },
+  {
+    "name": "Guruvayur",
+    "district": "Thrissur",
+    "lat": 10.595,
+    "lon": 76.041,
+    "category": "Pilgrim Center"
+  },
+  {
+    "name": "Chalakudy",
+    "district": "Thrissur",
+    "lat": 10.307,
+    "lon": 76.333,
+    "category": "Town"
+  },
+  {
+    "name": "Kozhikode",
+    "district": "Kozhikode",
+    "lat": 11.2588,
+    "lon": 75.7804,
+    "category": "District HQ"
+  },
+  {
+    "name": "SM Street Kozhikode",
+    "district": "Kozhikode",
+    "lat": 11.253,
+    "lon": 75.779,
+    "category": "Commercial Hub"
+  },
+  {
+    "name": "Kozhikode Beach",
+    "district": "Kozhikode",
+    "lat": 11.261,
+    "lon": 75.768,
+    "category": "Public Promenade"
+  },
+  {
+    "name": "Palakkad",
+    "district": "Palakkad",
+    "lat": 10.7867,
+    "lon": 76.6548,
+    "category": "District HQ"
+  },
+  {
+    "name": "Ottapalam",
+    "district": "Palakkad",
+    "lat": 10.772,
+    "lon": 76.381,
+    "category": "Town"
+  },
+  {
+    "name": "Malappuram",
+    "district": "Malappuram",
+    "lat": 11.051,
+    "lon": 76.0711,
+    "category": "District HQ"
+  },
+  {
+    "name": "Manjeri",
+    "district": "Malappuram",
+    "lat": 11.121,
+    "lon": 76.1215,
+    "category": "Town"
+  },
+  {
+    "name": "Perinthalmanna",
+    "district": "Malappuram",
+    "lat": 10.976,
+    "lon": 76.226,
+    "category": "Town"
+  },
+  {
+    "name": "Kannur",
+    "district": "Kannur",
+    "lat": 11.8745,
+    "lon": 75.3704,
+    "category": "District HQ"
+  },
+  {
+    "name": "Thalassery",
+    "district": "Kannur",
+    "lat": 11.7505,
+    "lon": 75.492,
+    "category": "Town"
+  },
+  {
+    "name": "Payyanur",
+    "district": "Kannur",
+    "lat": 12.1,
+    "lon": 75.2,
+    "category": "Town"
+  },
+  {
+    "name": "Kalpetta",
+    "district": "Wayanad",
+    "lat": 11.6095,
+    "lon": 76.0825,
+    "category": "District HQ"
+  },
+  {
+    "name": "Sultan Bathery",
+    "district": "Wayanad",
+    "lat": 11.664,
+    "lon": 76.257,
+    "category": "Town"
+  },
+  {
+    "name": "Mananthavady",
+    "district": "Wayanad",
+    "lat": 11.802,
+    "lon": 76.004,
+    "category": "Town"
+  },
+  {
+    "name": "Munnar",
+    "district": "Idukki",
+    "lat": 10.0889,
+    "lon": 77.0595,
+    "category": "Hill Station"
+  },
+  {
+    "name": "Thodupuzha",
+    "district": "Idukki",
+    "lat": 9.897,
+    "lon": 76.715,
+    "category": "Town"
+  },
+  {
+    "name": "Kattappana",
+    "district": "Idukki",
+    "lat": 9.752,
+    "lon": 77.118,
+    "category": "Town"
+  },
+  {
+    "name": "Kasaragod",
+    "district": "Kasaragod",
+    "lat": 12.5102,
+    "lon": 74.9852,
+    "category": "District HQ"
+  },
+  {
+    "name": "Kanhangad",
+    "district": "Kasaragod",
+    "lat": 12.312,
+    "lon": 75.092,
+    "category": "Town"
+  }
+]

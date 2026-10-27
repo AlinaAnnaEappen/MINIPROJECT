@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}Plan Your Journey &ndash; SHE SHIELD Advisory System{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 40px;" id="plan-section">
+  <div class="section-header" style="margin-bottom: 30px;">
+    <div class="section-tag">Interactive Advisory Console</div>
+    <h1 class="section-title">Pre-Travel Safety & Comfort Assessment</h1>
+    <p class="section-desc">
+      Enter your intended destination in Kerala, along with your planned travel date and time, to generate a 
+      grounded safety advisory supported by official Kerala Police statistics and emergency proximity analysis.
+    </p>
+  </div>
+
+  <div class="plan-container">
+    <!-- Left Column: Input Form -->
+    <div class="plan-form-card" id="form-card-container">
+      <h3 style="font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+        <span>📍</span> Journey Details
+      </h3>
+
+      <form id="plan-form" autocomplete="off">
+        <!-- Location Input with Autocomplete -->
+        <div class="form-group">
+          <label for="location-input">Destination in Kerala *</label>
+          <div class="input-wrapper">
+            <input 
+              type="text" 
+              id="location-input" 
+              class="form-control" 
+              placeholder="e.g., Chengannur, Kochi, Alappuzha, Kozhikode..." 
+              required
+            >
+            <ul class="autocomplete-list" id="autocomplete-list" style="display: none;"></ul>
+          </div>
+          <div class="form-help">Type any town, hub, or station. Select from suggestions or search freeform.</div>
+        </div>
+
+        <!-- Travel Date Input -->
+        <div class="form-group">
+          <label for="date-input">Travel Date *</label>
+          <input 
+            type="date" 
+            id="date-input" 
+            class="form-control" 
+            required
+          >
+          <div class="form-help">Past dates will not produce relevant pre-travel advisory.</div>
+        </div>
+
+        <!-- Travel Time Input with Quick Chips -->
+        <div class="form-group">
+          <label for="time-input">Travel / Arrival Time *</label>
+          <input 
+            type="time" 
+            id="time-input" 
+            class="form-control" 
+            required
+          >
+          
+          <div class="time-chips" id="time-chips-container">
+            <button type="button" class="chip-btn" data-time="09:00">Morning (9 AM)</button>
+            <button type="button" class="chip-btn" data-time="14:00">Afternoon (2 PM)</button>
+            <button type="button" class="chip-btn" data-time="19:00">Evening (7 PM)</button>
+            <button type="button" class="chip-btn active" data-time="21:30">Night (9:30 PM)</button>
+            <button type="button" class="chip-btn" data-time="01:30">Late Night (1:30 AM)</button>
+          </div>
+          <div class="form-help">Time of travel significantly affects natural street surveillance and transit options.</div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-submit" id="submit-btn">
+          <span>🛡️ Assess Travel Safety & Comfort</span>
+        </button>
+      </form>
+
+      <!-- Quick Guidance Callout -->
+      <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12.5px; color: var(--text-dim);">
+        <p>
+          <strong style="color:var(--gold-primary);">Verified Context:</strong>
+          Predictions utilize official Kerala Police SCRB records for all 14 administrative districts, 
+          mapped emergency services, and empirical transit perception machine learning.
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Column: Interactive Map & Live Results -->
+    <div class="results-wrapper">
+      <!-- Interactive Leaflet Map -->
+      <div class="map-container-wrapper">
+        <div class="map-header">
+          <h4>🗺️ Destination & Emergency Proximity Map</h4>
+          <div class="map-legend">
+            <div class="legend-item"><span class="legend-dot dot-dest"></span> Destination</div>
+            <div class="legend-item"><span class="legend-dot dot-police"></span> Police Station</div>
+            <div class="legend-item"><span class="legend-dot dot-women-ps"></span> Women's Cell</div>
+          </div>
+        </div>
+        <div id="advisory-map"></div>
+      </div>
+
+      <!-- Dynamic Advisory Results Card Container -->
+      <div id="results-container">
+        <!-- Initial Placeholder State -->
+        <div class="glass-card" style="text-align: center; padding: 48px 24px;">
+          <div style="font-size: 40px; margin-bottom: 12px;">🛡️</div>
+          <h3 style="font-size: 19px; color: #fff; margin-bottom: 8px;">Awaiting Travel Parameters</h3>
+          <p style="font-size: 14.5px; color: var(--text-muted); max-width: 480px; margin: 0 auto;">
+            Enter a destination in Kerala and planned time on the left console to generate a comprehensive 
+            safety advisory with nearby police station contacts and official crime statistics.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

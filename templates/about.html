@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}About Us &ndash; SHE SHIELD Project{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 40px;" id="about-section">
+  <div class="section-header">
+    <div class="section-tag">Academic Context & Team</div>
+    <h1 class="section-title">About the SHE SHIELD Project</h1>
+    <p class="section-desc">
+      A Sixth Semester Bachelor of Technology Mini Project developed at the Department of Computer Engineering, 
+      College of Engineering Chengannur, under APJ Abdul Kalam Technological University, Kerala.
+    </p>
+  </div>
+
+  <!-- College & Department Overview -->
+  <div class="glass-card" style="margin-bottom: 32px;">
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:16px;">
+      <div style="font-size:36px;">🏛️</div>
+      <div>
+        <h2 style="font-size: 22px; color: #fff;">College of Engineering Chengannur (CEC)</h2>
+        <p style="color: var(--gold-primary); font-size: 14px;">Department of Computer Engineering &bull; Alappuzha, Kerala</p>
+      </div>
+    </div>
+    <p style="color: var(--text-muted); font-size: 15px; line-height: 1.7;">
+      The <strong>Women Travel Safety & Comfort Index and Advisory System (SHE SHIELD)</strong> was conceived 
+      to bridge the gap between reactive emergency alert tools and proactive pre-travel decision-support platforms. 
+      By combining geospatial analysis, official police statistics, and machine learning, the project enables 
+      women travellers to assess destination viability prior to commencement of travel.
+    </p>
+  </div>
+
+  <!-- Student Authors & Mentorship -->
+  <div class="card-grid" style="margin-bottom: 36px;">
+    <div class="glass-card">
+      <div class="card-icon">👩‍💻</div>
+      <h3 class="card-title">Project Team</h3>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:10px;color:#e2e8f0;font-size:14.5px;">
+        <li><strong>Alina Anna Eappen</strong> &ndash; <code>CHN23CS033</code></li>
+        <li><strong>Athira Anil</strong> &ndash; <code>CHN23CS054</code></li>
+        <li><strong>Sreya Akku Shajan</strong> &ndash; <code>CHN23CS184</code></li>
+        <li><strong>Nair Ardra Santhosh</strong> &ndash; <code>LCHN23CS206</code></li>
+      </ul>
+    </div>
+
+    <div class="glass-card">
+      <div class="card-icon">🎓</div>
+      <h3 class="card-title">Academic Guidance</h3>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:10px;color:#e2e8f0;font-size:14.5px;">
+        <li>
+          <strong>Smt. Santhy Viswam</strong><br>
+          <span style="font-size:13px;color:var(--text-muted);">Project Guide &bull; Assistant Professor, Dept. of Computer Engineering</span>
+        </li>
+        <li>
+          <strong>Smt. Shabana Mol S</strong><br>
+          <span style="font-size:13px;color:var(--text-muted);">Project Coordinator &bull; Assistant Professor, Dept. of Computer Engineering</span>
+        </li>
+        <li>
+          <strong>Dr. Renu George</strong><br>
+          <span style="font-size:13px;color:var(--text-muted);">Professor & Head of the Department, Dept. of Computer Engineering</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Academic Literature Reference Summary -->
+  <div class="glass-card">
+    <h2 style="font-size: 20px; color: #fff; margin-bottom: 14px;">Literature Review & Foundations</h2>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="background:rgba(0,0,0,0.25);padding:14px;border-radius:8px;">
+        <h4 style="color:var(--gold-primary);font-size:15px;margin-bottom:4px;">1. Safetipin Survey-Based Urban Audit Framework (2023)</h4>
+        <p style="font-size:13.5px;color:var(--text-muted);">
+          Analyzed urban safety parameters including lighting, openness, security presence, and crowd density. 
+          SHE SHIELD builds upon these physical audit principles by integrating algorithmic pre-travel forecasting.
+        </p>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.25);padding:14px;border-radius:8px;">
+        <h4 style="color:var(--gold-primary);font-size:15px;margin-bottom:4px;">2. Next Gen Travel Safety for Women (IJCRT, 2025)</h4>
+        <p style="font-size:13.5px;color:var(--text-muted);">
+          Examined GPS routing and transit verification. Identified key gaps in pre-travel risk calculation, 
+          which SHE SHIELD addresses through its multi-tiered scoring framework.
+        </p>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.25);padding:14px;border-radius:8px;">
+        <h4 style="color:var(--gold-primary);font-size:15px;margin-bottom:4px;">3. Women Safety App Research (IJRASET)</h4>
+        <p style="font-size:13.5px;color:var(--text-muted);">
+          Emphasized user accessibility and emergency service connectivity. SHE SHIELD integrates direct 
+          station dialing and verified helpline linkages.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

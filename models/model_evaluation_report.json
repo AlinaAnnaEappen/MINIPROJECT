@@ -1,0 +1,62 @@
+{
+  "dataset_name": "Empirical Public Transit Safety Perception Dataset",
+  "sample_size": 2000,
+  "features": [
+    "cctv",
+    "female_staff",
+    "lighting",
+    "emergency_buttons",
+    "reserved_seats",
+    "announcements",
+    "driver_verified",
+    "crowd_high",
+    "is_night"
+  ],
+  "classes": [
+    "Caution (<=6/10)",
+    "Moderate (7/10)",
+    "Favorable (>=8/10)"
+  ],
+  "baseline_logistic_regression": {
+    "accuracy": 0.9,
+    "f1_score": 0.9002
+  },
+  "gradient_boosting_classifier": {
+    "accuracy": 1.0,
+    "precision_weighted": 1.0,
+    "recall_weighted": 1.0,
+    "f1_score_weighted": 1.0,
+    "confusion_matrix": [
+      [
+        178,
+        0,
+        0
+      ],
+      [
+        0,
+        75,
+        0
+      ],
+      [
+        0,
+        0,
+        147
+      ]
+    ],
+    "feature_importances": {
+      "driver_verified": 0.2612,
+      "emergency_buttons": 0.1962,
+      "announcements": 0.1907,
+      "female_staff": 0.1711,
+      "reserved_seats": 0.0828,
+      "lighting": 0.0629,
+      "cctv": 0.0351,
+      "crowd_high": 0.0,
+      "is_night": -0.0
+    }
+  },
+  "gradient_boosting_regressor": {
+    "mae_percentage": 0.01,
+    "r2_score": 1.0
+  }
+}

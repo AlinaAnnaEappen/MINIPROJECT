@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}Emergency Helplines & Contact &ndash; SHE SHIELD{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 40px;" id="contact-section">
+  <div class="section-header">
+    <div class="section-tag">Emergency Directory & Support</div>
+    <h1 class="section-title">Emergency Helplines & Police Directory</h1>
+    <p class="section-desc">
+      Official 24/7 toll-free emergency numbers, specialized women's safety patrol lines, 
+      and district police control rooms across Kerala.
+    </p>
+  </div>
+
+  <!-- Priority Helplines Grid -->
+  <div class="card-grid" style="margin-bottom: 40px;">
+    <!-- 112 -->
+    <div class="glass-card" style="border-top: 4px solid var(--unsafe-red);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <span style="font-size:32px;font-weight:800;color:var(--unsafe-red);">112</span>
+        <span style="font-size:11px;background:rgba(239,68,68,0.2);color:var(--unsafe-red);padding:2px 8px;border-radius:10px;">National Emergency</span>
+      </div>
+      <h3 style="font-size:17px;color:#fff;margin:8px 0 4px;">All-in-One Emergency Response</h3>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">
+        Immediate dispatch for Police, Fire, and Ambulance services across all states in India.
+      </p>
+      <a href="tel:112" class="btn-primary" style="padding:8px 16px;font-size:13px;justify-content:center;background:var(--unsafe-red);color:#fff;">
+        📞 Call 112
+      </a>
+    </div>
+
+    <!-- 1091 -->
+    <div class="glass-card" style="border-top: 4px solid var(--gold-primary);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <span style="font-size:32px;font-weight:800;color:var(--gold-primary);">1091</span>
+        <span style="font-size:11px;background:rgba(212,175,55,0.2);color:var(--gold-primary);padding:2px 8px;border-radius:10px;">Women Safety</span>
+      </div>
+      <h3 style="font-size:17px;color:#fff;margin:8px 0 4px;">Kerala Women Police Helpline</h3>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">
+        Dedicated 24x7 toll-free assistance for women facing harassment, danger, or seeking immediate travel escort.
+      </p>
+      <a href="tel:1091" class="btn-primary" style="padding:8px 16px;font-size:13px;justify-content:center;">
+        📞 Call 1091
+      </a>
+    </div>
+
+    <!-- 1515 Pink Patrol -->
+    <div class="glass-card" style="border-top: 4px solid #ec4899;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <span style="font-size:32px;font-weight:800;color:#ec4899;">1515</span>
+        <span style="font-size:11px;background:rgba(236,72,153,0.2);color:#ec4899;padding:2px 8px;border-radius:10px;">Pink Police</span>
+      </div>
+      <h3 style="font-size:17px;color:#fff;margin:8px 0 4px;">Pink Police Patrol Kerala</h3>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">
+        Specially deployed mobile patrol units for women and children in public areas, bus stands, and railway terminals.
+      </p>
+      <a href="tel:1515" class="btn-primary" style="padding:8px 16px;font-size:13px;justify-content:center;background:#ec4899;color:#fff;">
+        📞 Call 1515
+      </a>
+    </div>
+
+    <!-- 181 Mitra -->
+    <div class="glass-card" style="border-top: 4px solid var(--cyan-accent);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <span style="font-size:32px;font-weight:800;color:var(--cyan-accent);">181</span>
+        <span style="font-size:11px;background:rgba(56,189,248,0.2);color:var(--cyan-accent);padding:2px 8px;border-radius:10px;">Mitra Helpline</span>
+      </div>
+      <h3 style="font-size:17px;color:#fff;margin:8px 0 4px;">Women in Distress Helpline</h3>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">
+        National emergency support system for counselling, shelter access, and legal guidance for women.
+      </p>
+      <a href="tel:181" class="btn-primary" style="padding:8px 16px;font-size:13px;justify-content:center;background:var(--cyan-accent);color:#0c0a17;">
+        📞 Call 181
+      </a>
+    </div>
+  </div>
+
+  <!-- Kerala District Police Control Rooms -->
+  <div class="glass-card">
+    <h2 style="font-size: 20px; color: #fff; margin-bottom: 16px;">Kerala District Police Control Rooms</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:14px;">
+      <div style="background:rgba(0,0,0,0.3);padding:14px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <strong style="color:#fff;font-size:14px;display:block;">Alappuzha Control Room</strong>
+          <span style="font-size:12px;color:var(--text-muted);">0477-2251326</span>
+        </div>
+        <a href="tel:04772251326" style="color:var(--safe-green);font-size:13px;text-decoration:none;font-weight:600;">📞 Call</a>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.3);padding:14px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <strong style="color:#fff;font-size:14px;display:block;">Chengannur PS Landline</strong>
+          <span style="font-size:12px;color:var(--text-muted);">0479-2452233</span>
+        </div>
+        <a href="tel:04792452233" style="color:var(--safe-green);font-size:13px;text-decoration:none;font-weight:600;">📞 Call</a>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.3);padding:14px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <strong style="color:#fff;font-size:14px;display:block;">Kochi City Control Room</strong>
+          <span style="font-size:12px;color:var(--text-muted);">0484-2394770</span>
+        </div>
+        <a href="tel:04842394770" style="color:var(--safe-green);font-size:13px;text-decoration:none;font-weight:600;">📞 Call</a>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.3);padding:14px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <strong style="color:#fff;font-size:14px;display:block;">Thiruvananthapuram City</strong>
+          <span style="font-size:12px;color:var(--text-muted);">0471-2331843</span>
+        </div>
+        <a href="tel:04712331843" style="color:var(--safe-green);font-size:13px;text-decoration:none;font-weight:600;">📞 Call</a>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.3);padding:14px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <strong style="color:#fff;font-size:14px;display:block;">Kozhikode City Control Room</strong>
+          <span style="font-size:12px;color:var(--text-muted);">0495-2722220</span>
+        </div>
+        <a href="tel:04952722220" style="color:var(--safe-green);font-size:13px;text-decoration:none;font-weight:600;">📞 Call</a>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.3);padding:14px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <strong style="color:#fff;font-size:14px;display:block;">Kollam City Control Room</strong>
+          <span style="font-size:12px;color:var(--text-muted);">0474-2764477</span>
+        </div>
+        <a href="tel:04742764477" style="color:var(--safe-green);font-size:13px;text-decoration:none;font-weight:600;">📞 Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
