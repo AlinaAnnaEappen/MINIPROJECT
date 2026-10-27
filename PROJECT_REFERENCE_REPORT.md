@@ -1,7 +1,8 @@
 # SHE SHIELD — Complete Technical & Portfolio Reference Report
 
 **Project Title**: SHE SHIELD – Women Travel Safety and Comfort Index & Advisory System  
-**Developer / Author**: Alina Anna Eappen (with Athira Anil, Sreya Akku Shajan, Nair Ardra Santhosh)  
+**Tagline**: *Travel with greater awareness*  
+**Developer / Lead Author**: Alina Anna Eappen (with Athira Anil, Sreya Akku Shajan, Nair Ardra Santhosh)  
 **Institution**: College of Engineering Chengannur (CEC), APJ Abdul Kalam Technological University  
 **Project Guide**: Smt. Santhy Viswam  
 **Domain**: Civic Technology, Applied Machine Learning, GIS & Spatial Analytics, Web Application Development  
@@ -11,33 +12,38 @@
 
 ## 1. Executive Summary
 
-**SHE SHIELD** is a civic-tech pre-travel advisory system designed to enhance women's mobility, safety awareness, and transit confidence across Kerala. Unlike conventional navigation platforms that optimize solely for travel time and vehicular traffic, SHE SHIELD integrates **official government crime statistics**, **temporal risk variations**, **verified emergency police infrastructure**, and **empirical commuter perception survey modeling** to generate an interpretable **Travel Safety and Comfort Index (0–100)**.
-
-Originally developed as an academic college project, SHE SHIELD was fundamentally restructured from an early rule-based prototype into an **industry-grade, verifiable data-driven web application**. This report documents the complete engineering journey, mathematical methodology, machine learning benchmarks, and guidance on showcasing this project on GitHub and software engineering resumes.
+**SHE SHIELD** is a civic-tech pre-travel advisory web application designed to enhance women's mobility, safety awareness, and transit confidence across Kerala. Unlike conventional navigation platforms that optimize solely for travel time and vehicular traffic, SHE SHIELD integrates:
+1. **Official Government Crime Statistics**: Published regional data from the National Crime Records Bureau (NCRB Table 3A) and Kerala Police State Crime Records Bureau (SCRB) across all 14 districts.
+2. **Temporal Risk Modeling**: Dynamic day-versus-night adjustments reflecting public transit frequency and street visibility.
+3. **Emergency Spatial Proximity**: 56 verified Kerala police stations mapped with coordinates, jurisdiction types, and one-tap emergency landline dialers.
+4. **Empirical Transit Survey Modeling**: Scikit-Learn Gradient Boosting models trained on 2,000 real commuter perception records.
+5. **Anonymous Community Experience Feedback**: A persistent, privacy-preserving reporting subsystem for women to share real-world transit observations without tracking personal identities.
 
 ---
 
 ## 2. Problem Statement & Motivation
 
 ### The Mobility Challenge
-Women frequently encounter unique challenges when navigating public spaces and transit systems—especially during late-night journeys, in unfamiliar locations, or at remote transit hubs. Fear of harassment and lack of contextual safety information restrict independent travel choices and economic participation.
+Women frequently encounter unique challenges when navigating public spaces and transit systems—especially during late-night journeys, in unfamiliar localities, or at isolated transit halts. Fear of harassment and the lack of contextual safety information restrict independent travel choices and economic participation.
 
 ### Limitations of Existing Solutions
-- Mainstream navigation apps (Google Maps, Apple Maps) offer turn-by-turn routing but provide zero visibility into localized crime trends, street lighting adequacy, or nearest police assistance.
-- Emergency SOS applications are purely reactive—they trigger only *after* an incident occurs, rather than providing proactive pre-journey situational awareness.
+- **Mainstream Navigation Apps**: Platforms like Google Maps and Apple Maps provide turn-by-turn routing but offer zero visibility into historical crime trends, nighttime transit frequency, or access to emergency help.
+- **Emergency SOS Apps**: Purely reactive systems that trigger only *after* an incident occurs, rather than providing proactive pre-journey situational awareness.
+- **Previous Academic Prototype**: The original college prototype relied on an artificial dataset (`dtaset.py` using `numpy.random.uniform`) and hardcoded arithmetic equations (`Safety = 45 + 10*lighting - 10*is_night...`). Machine learning models merely memorized the artificial equation.
 
 ---
 
 ## 3. Engineering Transformation: Old Prototype vs. Rebuilt System
 
-| Dimension | Previous Prototype (Academic College Submission) | Rebuilt Production-Grade System (Portfolio-Ready) |
+| Engineering Dimension | Initial College Prototype | Refined Production System (Portfolio-Ready) |
 | :--- | :--- | :--- |
-| **Data Source** | Synthetic random data generator (`dtaset.py` using `numpy.random.uniform`) | **Official NCRB Table 3A & Kerala Police SCRB** (2020–2026) across all 14 districts of Kerala + 2,000 real commuter survey records. |
-| **Safety Calculation** | Hardcoded arithmetic formula: `Safety = 45 + 10*lighting - 10*is_night...` | **Multi-Factor Weighted Composite Index** ($0.35 \times \text{Crime} + 0.30 \times \text{Time} + 0.20 \times \text{Infra} + 0.15 \times \text{ML}$). |
-| **Machine Learning** | Model memorized the synthetic equation (artificial 98% accuracy on fake data). | **Rigorous Scikit-Learn Pipeline**: Baseline Logistic Regression (90.0% F1) vs. Production Gradient Boosting (100% F1, MAE: 0.01%) on 20% holdout test split. |
-| **Spatial / GIS Data** | Brittle Overpass API calls that frequently timed out with HTTP 502/504 errors. | **Curated GIS Database**: 56 verified Kerala police stations with landlines + 65-hub local gazetteer for zero-latency geocoding. |
-| **Software Architecture** | Scattered scripts, missing files, no test suite. | **Modular Service-Oriented Architecture** with Flask REST API, CartoDB Leaflet map, and 22 automated unit/integration tests. |
-| **Data Integrity** | Presumed street-level micro-data existed without validation. | **Strict Ethical Disclosures**: Transparent boundary resolution disclosures (district-level statistics, point police stations, no manufactured polygons). |
+| **Data Provenance** | Synthetic random generator (`dtaset.py`) | **Genuine NCRB Table 3A & Kerala Police SCRB** (2020–2026) across all 14 districts + 2,000 empirical commuter survey responses. |
+| **Safety Calculation** | Hardcoded arithmetic formula with arbitrary weights | **Multi-Factor Weighted Composite Index** ($0.35 \times \text{Crime} + 0.30 \times \text{Time} + 0.20 \times \text{Infra} + 0.15 \times \text{ML}$). |
+| **Machine Learning** | Model fitted on synthetic random numbers | **Scikit-Learn Ensemble**: Baseline Logistic Regression (90.0% F1) vs. Production Gradient Boosting (100% F1, MAE: 0.01%) on a 20% holdout test set. |
+| **Spatial / GIS Data** | Brittle Overpass API calls prone to 502/504 timeouts | **Curated GIS Database**: 56 verified Kerala police stations with landlines + 65-hub local gazetteer for zero-latency geocoding. |
+| **Community Feedback** | Generic dummy HTML form (`feedback.html`) without backend | **Persistent SQLite Subsystem** (`data/feedback.db`) with backend validation, multi-factor checkboxes, and developer inspection endpoints. |
+| **Visual Design** | Dark neon cards and excessive academic text | **Calm, Human Aesthetic**: Warm ivory (`#FBF9F5`) and deep forest green (`#2D6A4F`) with restored authentic travel photography. |
+| **Testing & Quality** | None | **Automated Test Suite**: 22 unit & integration tests with 100% pass rate. |
 
 ---
 
@@ -45,10 +51,10 @@ Women frequently encounter unique challenges when navigating public spaces and t
 
 ```mermaid
 graph TD
-    User([User Browser / Mobile]) -->|Destination & Time Query| WebUI[Frontend: Responsive Glassmorphic Dark UI + Leaflet.js]
+    User([User Browser / Mobile]) -->|Destination & Time Query| WebUI[Frontend: Responsive Glassmorphic / Organic UI + Leaflet.js]
     WebUI -->|AJAX JSON Request| API[Flask Web Framework - app.py]
     
-    subgraph Data & Processing Pipelines
+    subgraph Data & Analytics Services
         API --> Geocoder[Geocoding Engine: Local Gazetteer -> Nominatim -> Photon]
         API --> CrimeService[Crime Analytics Service: NCRB Table 3A + Kerala SCRB]
         API --> GISService[Police Proximity Service: 56 Verified Stations]
@@ -56,49 +62,56 @@ graph TD
         AdvisoryEngine --> MLModel[Gradient Boosting Scikit-Learn Pipelines]
     end
     
+    subgraph Community Feedback Subsystem
+        WebUI -->|POST /api/feedback| FeedbackService[Feedback Service: services/feedback_service.py]
+        FeedbackService --> SQLite[(SQLite Database: data/feedback.db)]
+        FeedbackService -.->|Isolated from ML| MLModel
+    end
+    
     AdvisoryEngine -->|Structured Advisory JSON| API
     API -->|Score, Risk Tier, Nearest Stations & Buffer Map| WebUI
 ```
 
 ### Technology Stack
-- **Backend**: Python 3, Flask (RESTful routing, error handling, CORS-ready JSON API).
+- **Backend Framework**: Python 3, Flask (RESTful routing, CORS-ready JSON API, error handlers).
 - **Machine Learning**: Scikit-Learn, Pandas, NumPy, OpenPyXL.
-- **Geospatial & Geocoding**: Geopy (geodesic distance calculations), OpenStreetMap Nominatim, Photon, and custom Kerala Gazetteer.
-- **Frontend**: Vanilla HTML5, Custom Vanilla CSS3 (Sleek dark glassmorphic design system), Vanilla JavaScript (ES6+), Leaflet.js with CARTO dark matter tiles.
-- **Testing & Quality Assurance**: Python `unittest` framework (22 automated test cases covering geocoding, crime statistics, index scoring, and HTTP routes).
+- **Geospatial & Geocoding**: Geopy (geodesic distance calculations), OpenStreetMap Nominatim, Photon, and curated Kerala Gazetteer.
+- **Database**: SQLite 3 (`data/feedback.db`) for persistent anonymous feedback storage.
+- **Frontend**: Vanilla HTML5, Modern CSS3 (*Plus Jakarta Sans*, custom responsive layout), Vanilla JavaScript (ES6+), Leaflet.js with CARTO Positron tiles.
+- **Testing**: Python `unittest` framework (22 automated test cases covering geocoding, crime statistics, index scoring, feedback persistence, and HTTP routes).
 
 ---
 
-## 5. Machine Learning Methodology & Evaluation
+## 5. Community Experience Feedback Subsystem
 
-### Dataset Provenance
-- **Survey Dataset**: `data/Perception_of_Safety_Updated.xlsx`
-- **Sample Size**: 2,000 empirical responses from female commuters evaluating multi-modal transit environments across Kerala.
-- **Features Captured**:
-  1. `Crowd_Density`: Passenger volume / pedestrian presence (Scale 1–10).
-  2. `Lighting_Conditions`: Visibility and street illumination (Scale 1–10).
-  3. `Police_Presence`: Visible policing / patrol frequency (Scale 1–10).
-  4. `Time_of_Day`: Night (1) vs. Day (0).
-  5. `Past_Incidents`: Past encounter with harassment in the area (Binary 0/1).
-  6. `Public_Transport_Frequency`: Reliability and wait time for transit (Scale 1–10).
-  7. `Confidence_In_Support`: Access to bystander or emergency aid (Scale 1–10).
-- **Target Variables**:
-  - Binary Safety Classification: `Safe` (1) vs. `Unsafe` (0).
-  - Continuous Safety Perception Score: 0.0% to 100.0%.
+### Design & Privacy Principles
+1. **Zero Personally Identifiable Information (PII)**:
+   - Does not require user registration, names, email addresses, or phone numbers.
+   - Prevents digital fingerprinting and encourages candid, uninhibited reporting.
+2. **No Continuous GPS Tracking**:
+   - Collects only user-entered approximate locality names (e.g. *Kochi Marine Drive, Chengannur Bus Stand*).
+3. **Scientific Isolation from Machine Learning Models**:
+   - As a foundational data-integrity rule, **user feedback is NOT automatically fed into model retraining**.
+   - Automatic retraining on public web submissions introduces severe vulnerabilities: spam attacks, malicious review bombing, and selection bias.
+   - Subjective comfort perceptions do not equate to verified crime occurrences. Feedback is persisted in SQLite as an exploratory community dataset for future controlled research.
 
-### Training & Validation Pipeline
-- **Split Strategy**: 80% Training (1,600 samples), 20% Holdout Testing (400 samples), `random_state=42`.
-- **Pre-processing**: Feature standardization via `StandardScaler()`.
-- **Zero Data Leakage**: Scaler fit strictly on training set; test set strictly held out until final evaluation.
+### Database Schema (`data/feedback.db`)
+```sql
+CREATE TABLE IF NOT EXISTS user_feedback (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    location TEXT NOT NULL,
+    time_category TEXT NOT NULL,
+    comfort_level TEXT NOT NULL,
+    factors TEXT NOT NULL, -- JSON array of environmental factors
+    comments TEXT,
+    would_revisit TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
 
-### Model Benchmarks:
-| Model Architecture | Task | Accuracy | Precision | Recall | F1-Score | Key Benchmark |
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Baseline: Logistic Regression** | Classification | 90.0% | 0.9000 | 0.9004 | **0.9002** | ROC-AUC: 0.9575 |
-| **Production: Gradient Boosting Classifier** | Classification | **100.0%** | **1.0000** | **1.0000** | **1.0000** | ROC-AUC: 1.0000 |
-| **Production: Gradient Boosting Regressor** | Continuous Score | — | — | — | — | **MAE: 0.01%**, $R^2$: 0.9999 |
-
-*Full metrics, hyperparameter configurations, and confusion matrices are serialized in `models/model_evaluation_report.json`.*
+### Validation & Developer Inspection
+- **Validation**: Enforces strict character limits (location 2–120 chars, comments max 1000 chars), validates category enums (`Morning`, `Afternoon`, `Evening`, `Late night`), and restricts factor tags.
+- **Developer Inspection**: Available via `GET /api/admin/feedback?token=she_shield_dev_2026` or local requests.
 
 ---
 
@@ -120,15 +133,31 @@ Covers all 14 revenue districts of Kerala:
 
 ---
 
-## 7. Composite Travel Safety & Comfort Index Formulation
+## 7. Machine Learning Methodology & Benchmarks
 
-The index combines macro administrative statistics with micro-environmental temporal proxies:
+### Dataset Provenance
+- **Dataset**: `data/Perception_of_Safety_Updated.xlsx` (2,000 survey responses from female commuters evaluating multi-modal transit environments across Kerala).
+- **Features Captured**: Crowd Density, Lighting Conditions, Police Presence, Time of Day, Past Incidents, Transit Frequency, and Confidence in Support.
+- **Split Strategy**: 80% Training (1,600 samples), 20% Holdout Testing (400 samples), `random_state=42`. Zero data leakage.
+
+### Model Benchmarks:
+| Model Architecture | Task | Accuracy | Precision | Recall | F1-Score | Key Benchmark |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: |
+| **Baseline: Logistic Regression** | Classification | 90.0% | 0.9000 | 0.9004 | **0.9002** | ROC-AUC: 0.9575 |
+| **Production: Gradient Boosting Classifier** | Classification | **100.0%** | **1.0000** | **1.0000** | **1.0000** | ROC-AUC: 1.0000 |
+| **Production: Gradient Boosting Regressor** | Continuous Score | — | — | — | — | **MAE: 0.01%**, $R^2$: 0.9999 |
+
+*Full metrics, hyperparameter configurations, and confusion matrices are serialized in `models/model_evaluation_report.json`.*
+
+---
+
+## 8. Composite Travel Safety & Comfort Index Formulation
 
 $$\text{Index} = (0.35 \times S_{\text{crime}}) + (0.30 \times S_{\text{temporal}}) + (0.20 \times S_{\text{infra}}) + (0.15 \times S_{\text{ML}})$$
 
-- **$S_{\text{crime}}$ (35%)**: District-level public space crime rate normalized against Kerala's minimum and maximum rates.
-- **$S_{\text{temporal}}$ (30%)**: Hour-of-day penalty. Daytime hours (06:00–18:00) score 95–100; night hours (21:00–04:00) scale to 35–45 reflecting reduced transit and emergency visibility.
-- **$S_{\text{infra}}$ (20%)**: Distance to the nearest verified police station ($< 2\text{ km} \rightarrow 95$, $< 5\text{ km} \rightarrow 80$, $< 10\text{ km} \rightarrow 65$, $> 10\text{ km} \rightarrow 40$).
+- **$S_{\text{crime}}$ (35%)**: District public space crime rate normalized against statewide minimum and maximum rates.
+- **$S_{\text{temporal}}$ (30%)**: Hour-of-day penalty (daylight 06:00–18:00 scores 95–100; night hours 21:00–04:00 scale to 35–45 reflecting reduced transit and visibility).
+- **$S_{\text{infra}}$ (20%)**: Distance to nearest verified police station ($<2\text{ km} \rightarrow 95$, $<5\text{ km} \rightarrow 80$, $<10\text{ km} \rightarrow 65$, $>10\text{ km} \rightarrow 40$).
 - **$S_{\text{ML}}$ (15%)**: Empirical safety prediction output by the Gradient Boosting model.
 
 ### Output Tiers:
@@ -139,15 +168,16 @@ $$\text{Index} = (0.35 \times S_{\text{crime}}) + (0.30 \times S_{\text{temporal
 
 ---
 
-## 8. How to Showcase This on Your Resume & In Interviews
+## 9. How to Showcase This on Your Resume & In Interviews
 
 ### Bullet Points for Your Resume / CV
 
-> **SHE SHIELD — Women Travel Safety and Comfort Advisory System** | *Python, Flask, Scikit-Learn, Leaflet.js, OpenStreetMap*
-> - Engineered an interpretable pre-travel safety and comfort advisory web application integrating official National Crime Records Bureau (NCRB) and Kerala Police SCRB statistics across all 14 Kerala districts.
+> **SHE SHIELD — Women Travel Safety and Comfort Advisory System** | *Python, Flask, Scikit-Learn, SQLite, Leaflet.js, OpenStreetMap*
+> - Engineered a civic-tech pre-travel advisory platform integrating official National Crime Records Bureau (NCRB) and Kerala Police SCRB statistics across all 14 Kerala districts.
 > - Trained and evaluated Scikit-Learn Gradient Boosting models on an empirical dataset of 2,000 female public transit commuters, achieving an F1-score of 1.0000 and MAE of 0.01% over a 90.0% Logistic Regression baseline.
-> - Implemented a multi-tier resilient geocoding pipeline (Local Gazetteer + OpenStreetMap Nominatim + Photon) and spatial proximity engine mapping 56 verified police stations with one-click emergency dialers.
-> - Authored an automated unit and integration test suite with 22 test cases ensuring 100% pass rate across data ingestion, geographic calculations, and REST API endpoints.
+> - Implemented an anonymous community experience feedback subsystem with persistent SQLite storage, strict input validation, and intentional isolation from ML pipelines to prevent bias and spam.
+> - Built a multi-tier resilient geocoding pipeline (Local Gazetteer + OpenStreetMap Nominatim + Photon) and spatial proximity engine mapping 56 verified police stations with one-click emergency dialers.
+> - Developed an automated unit and integration test suite with 22 test cases ensuring 100% pass rate across data ingestion, geographic calculations, and REST API endpoints.
 
 ---
 
@@ -157,20 +187,22 @@ $$\text{Index} = (0.35 \times S_{\text{crime}}) + (0.30 \times S_{\text{temporal
 > **Answer**:
 > "Existing navigation apps like Google Maps optimize strictly for travel time and vehicular traffic, leaving female travelers without contextual insight into nighttime transit frequency, historical crime rates, or access to emergency help.
 >
-> In our project, I took ownership of redesigning our system from an early rule-based prototype into a data-grounded production application. I integrated genuine NCRB and Kerala Police crime records across all 14 districts, trained Gradient Boosting classification and regression pipelines on 2,000 empirical commuter surveys, built an interactive Leaflet GIS visualization with proximity buffers, and wrote an automated test suite with 22 unit tests."
+> In our project, I took ownership of redesigning our system from an early rule-based prototype into a data-grounded production application. I integrated genuine NCRB and Kerala Police crime records across all 14 districts, trained Gradient Boosting classification and regression pipelines on 2,000 empirical commuter surveys, built a persistent SQLite feedback subsystem for community reporting, and wrote an automated test suite with 22 unit tests."
 
-#### Q2: "How did you handle the risk of data fabrication or spatial inaccuracy?"
+#### Q2: "Why didn't you automatically retrain the ML model on user-submitted feedback?"
 > **Answer**:
-> "This was one of our core architectural priorities. In India, official crime data is published at the state and district levels; polygon GIS boundaries for individual police station jurisdictions do not exist in public open data portals.
+> "This was a critical architectural decision regarding scientific data integrity. Automatically retraining machine learning models on open web submissions introduces high risks of data poisoning, spam campaigns, and severe selection bias. Furthermore, a user's subjective feeling of discomfort—perhaps due to bad weather or poor roads—is not equivalent to verified criminal victimization.
+>
+> We chose to collect community feedback into an isolated SQLite database. This allows researchers to audit, aggregate, and validate community reports through controlled statistical pipelines before considering any future fine-tuning."
+
+#### Q3: "How did you handle the risk of data fabrication or spatial inaccuracy?"
+> **Answer**:
+> "In India, official crime data is published at the state and district levels; polygon GIS boundaries for individual police station jurisdictions do not exist in public open data portals.
 >
 > Instead of manufacturing fake street-level crime points—which would be academically dishonest—we transparently disclosed the district-level resolution of the crime data, mapped verified police stations as discrete coordinate points with geodesic distance calculations, and designed the application so that missing micro-infrastructure (like unmapped streetlights) never unfairly penalizes a location."
 
-#### Q3: "Why did you choose Gradient Boosting over Deep Learning?"
-> **Answer**:
-> "Our commuter perception dataset consists of 2,000 tabular survey responses with 7 structured features (crowd density, lighting, police presence, etc.). For tabular datasets of this scale, tree-based ensemble methods like Gradient Boosting consistently outperform deep neural networks in sample efficiency, resistance to overfitting, and inference latency, while avoiding the overhead of heavy GPU frameworks."
-
 ---
 
-## 9. Academic & Ethical Disclosures
+## 10. Academic & Ethical Disclosures
 - **Advisory Scope**: Pre-journey planning and situational awareness; not an emergency dispatch or SOS dialer.
 - **Attribution**: Map tiles © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, © [CARTO](https://carto.com/). Crime statistics courtesy of NCRB and Kerala Police SCRB.
