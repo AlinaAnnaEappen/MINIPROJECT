@@ -1,179 +1,124 @@
 {% extends "base.html" %}
 
-{% block title %}SHE SHIELD – Women Travel Safety and Comfort Index & Advisory System{% endblock %}
+{% block title %}SHE SHIELD – Travel with Greater Awareness{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
-<section class="hero" id="hero-section">
-  <div class="hero-pill">
-    <span>🏛️ College of Engineering Chengannur</span>
-    <span>&bull;</span>
-    <span>Academic Mini Project 2026</span>
-  </div>
-
-  <h1>
-    <span class="gold-text">SHE SHIELD</span><br>
-    Women Travel Safety & Comfort Advisory
-  </h1>
-
-  <p class="hero-subtitle">
-    A data-grounded pre-travel decision-support system designed to help women assess travel comfort, 
-    examine verified Kerala Police district crime statistics, and locate nearby emergency infrastructure before starting their journey.
-  </p>
-
-  <div class="hero-actions">
-    <a href="{{ url_for('plan') }}" class="btn-primary" id="hero-plan-btn">
-      <span>🛡️ Plan Your Journey</span>
-      <span>&rarr;</span>
-    </a>
-    <a href="{{ url_for('methodology') }}" class="btn-secondary" id="hero-methodology-btn">
-      <span>📖 Explore Methodology & Crime Data</span>
-    </a>
-  </div>
-
-  <!-- Key Statistics Banner -->
-  <div class="hero-stats">
-    <div class="stat-item">
-      <span class="stat-value">14</span>
-      <span class="stat-label">Kerala Districts Covered</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-value">18,000+</span>
-      <span class="stat-label">Annual SCRB Crime Records</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-value">55+</span>
-      <span class="stat-label">Mapped Police Stations</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-value">2,000</span>
-      <span class="stat-label">Empirical Survey Responses</span>
-    </div>
-  </div>
-</section>
-
-<!-- The Problem & Proactive Philosophy Section -->
-<section class="section" id="problem-overview">
-  <div class="section-header">
-    <div class="section-tag">Problem Definition & Motivation</div>
-    <h2 class="section-title">Why Proactive Travel Guidance Matters</h2>
-    <p class="section-desc">
-      Most existing women’s safety applications operate reactively &mdash; activating panic buttons or live location broadcasts only after an emergency unfolds. 
-      SHE SHIELD addresses the critical pre-travel question:
-      <em>“How suitable, well-supported, and safe is this destination at my planned hour of travel?”</em>
-    </p>
-  </div>
-
-  <div class="card-grid">
-    <div class="glass-card">
-      <div class="card-icon">⚡</div>
-      <h3 class="card-title">Pre-Travel Decision Support</h3>
-      <p class="card-body">
-        Evaluates potential hazards before departing. Users enter their destination, date, and planned arrival time 
-        to receive an intelligible Safety & Comfort Probability (0&ndash;100%) and practical guidance.
+<!-- Hero Section with Restored Authentic Travel Photography -->
+<section class="hero-section" id="hero-section">
+  <div class="hero-backdrop"></div>
+  
+  <div class="hero-container">
+    <div class="hero-content">
+      <div class="hero-kicker">Women's Pre-Travel Advisory</div>
+      <h1 class="hero-title">
+        Travel with <span class="accent-text">greater awareness.</span>
+      </h1>
+      <p class="hero-description">
+        SHE SHIELD gives women travelling across Kerala practical situational awareness before stepping out &mdash; combining verified district crime statistics, travel timing, and nearby emergency assistance.
       </p>
-    </div>
 
-    <div class="glass-card">
-      <div class="card-icon">📊</div>
-      <h3 class="card-title">Grounded in Genuine Crime Data</h3>
-      <p class="card-body">
-        Incorporates published statistics from the Kerala Police State Crime Records Bureau (SCRB) and NCRB 
-        <em>Crime in India</em> reports, replacing arbitrary rules with empirical regional evidence.
-      </p>
-    </div>
+      <div class="hero-cta-group">
+        <a href="{{ url_for('plan') }}" class="btn-primary" id="hero-plan-btn">
+          <span>Plan Your Journey</span>
+          <span class="btn-arrow">&rarr;</span>
+        </a>
+        <a href="{{ url_for('share_experience') }}" class="btn-secondary" id="hero-feedback-btn">
+          <span>Share Your Experience</span>
+        </a>
+      </div>
 
-    <div class="glass-card">
-      <div class="card-icon">🗺️</div>
-      <h3 class="card-title">Interactive Geospatial Mapping</h3>
-      <p class="card-body">
-        Visualizes destinations alongside confirmed police station locations, emergency telephone numbers, 
-        and 2km / 5km proximity rings to clearly depict available rapid-response coverage.
-      </p>
-    </div>
-
-    <div class="glass-card">
-      <div class="card-icon">🤖</div>
-      <h3 class="card-title">Honest Machine Learning</h3>
-      <p class="card-body">
-        Trained on real public transit safety perception datasets (2,000 survey instances) using Gradient Boosting 
-        and Logistic Regression, with transparent precision, recall, and feature-importance metrics.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- Four Pillars of Assessment -->
-<section class="section" style="background: rgba(18, 14, 34, 0.4); border-top: 1px solid var(--bg-card-border); border-bottom: 1px solid var(--bg-card-border);" id="pillars">
-  <div class="section-header">
-    <div class="section-tag">Analytical Framework</div>
-    <h2 class="section-title">The Four Pillars of the SHE SHIELD Index</h2>
-    <p class="section-desc">
-      Our index integrates four verifiable factors rather than opaque, ungrounded heuristics.
-    </p>
-  </div>
-
-  <div class="card-grid">
-    <div class="glass-card">
-      <span style="font-size:12px;color:var(--cyan-accent);font-weight:700;">PILLAR 1 (35% WEIGHT)</span>
-      <h3 class="card-title" style="margin-top:8px;">Regional Crime Pressure</h3>
-      <p class="card-body">
-        Derived from official district-level police registries in Kerala. Examines public-space offense rates 
-        (molestation, assault, stalking) per lakh female population to capture baseline environmental security.
-      </p>
-    </div>
-
-    <div class="glass-card">
-      <span style="font-size:12px;color:var(--gold-primary);font-weight:700;">PILLAR 2 (30% WEIGHT)</span>
-      <h3 class="card-title" style="margin-top:8px;">Temporal & Lighting Context</h3>
-      <p class="card-body">
-        Differentiates daytime travel from twilight, late-night, and predawn travel. Incorporates proven urban safety 
-        audit principles concerning pedestrian footfall and natural street surveillance ("eyes on the street").
-      </p>
-    </div>
-
-    <div class="glass-card">
-      <span style="font-size:12px;color:var(--safe-green);font-weight:700;">PILLAR 3 (20% WEIGHT)</span>
-      <h3 class="card-title" style="margin-top:8px;">Emergency Proximity</h3>
-      <p class="card-body">
-        Calculates exact Haversine distance to confirmed mapped police stations and emergency healthcare facilities. 
-        Provides direct telephonic contact to local station houses and Kerala Pink Police patrol teams.
-      </p>
-    </div>
-
-    <div class="glass-card">
-      <span style="font-size:12px;color:#c084fc;font-weight:700;">PILLAR 4 (15% WEIGHT)</span>
-      <h3 class="card-title" style="margin-top:8px;">Transit Comfort ML Model</h3>
-      <p class="card-body">
-        Synthesizes surveyed public transit perceptions (crowd density, lighting, reserved seats, driver verification) 
-        through an empirical Gradient Boosting model to reflect experiential comfort levels.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- Data Integrity & Transparency Callout -->
-<section class="section" id="data-integrity-notice">
-  <div class="glass-card" style="border-left: 6px solid var(--gold-primary); padding: 36px;">
-    <div style="display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;">
-      <div style="font-size:36px;">📜</div>
-      <div style="flex:1;min-width:280px;">
-        <h3 style="font-size:22px;color:#fff;margin-bottom:10px;">Our Commitment to Data Integrity & Academic Honesty</h3>
-        <p style="color:var(--text-muted);font-size:15px;line-height:1.7;margin-bottom:16px;">
-          Following academic review and feedback, SHE SHIELD intentionally avoids manufacturing synthetic crime coordinates 
-          or fictitious street-level crime counts. In India, verified crime records are published at the State and District levels.
-          We explicitly present district-level crime statistics for what they are &mdash; macro administrative context &mdash; and 
-          display police stations as mapped infrastructure points with honest distance measurements.
-        </p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a href="{{ url_for('methodology') }}" class="btn-primary" style="padding:10px 22px;font-size:14px;">
-            Read Full Methodology Document
-          </a>
-          <a href="{{ url_for('plan') }}" class="btn-secondary" style="padding:10px 22px;font-size:14px;">
-            Test the System Live
-          </a>
+      <!-- Quick Route Selector -->
+      <div class="quick-search-box">
+        <span class="quick-search-label">Popular routes in Kerala:</span>
+        <div class="quick-chips">
+          <a href="{{ url_for('plan') }}?q=Chengannur" class="quick-chip">Chengannur</a>
+          <a href="{{ url_for('plan') }}?q=Kochi" class="quick-chip">Kochi</a>
+          <a href="{{ url_for('plan') }}?q=Kozhikode" class="quick-chip">Kozhikode</a>
+          <a href="{{ url_for('plan') }}?q=Thiruvananthapuram" class="quick-chip">Thiruvananthapuram</a>
+          <a href="{{ url_for('plan') }}?q=Alappuzha" class="quick-chip">Alappuzha</a>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section: 3 Clear Steps -->
+<section class="how-it-works-section">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-badge">How It Works</span>
+      <h2 class="section-heading">Thoughtful preparation before you depart</h2>
+      <p class="section-subtext">
+        Unlike panic buttons that activate only after trouble occurs, SHE SHIELD helps you make informed choices before leaving home.
+      </p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3 class="step-title">Specify Destination & Timing</h3>
+        <p class="step-desc">
+          Enter any town, transit hub, or locality across Kerala, along with whether you travel morning, afternoon, evening, or night.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3 class="step-title">Review Grounded Advisory</h3>
+        <p class="step-desc">
+          Receive an easy-to-read travel comfort assessment informed by official Kerala Police statistics and typical transit presence.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3 class="step-title">Locate Nearby Help</h3>
+        <p class="step-desc">
+          Explore confirmed police station locations, distance in kilometres, and one-tap direct landline contacts right on the map.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Context & Integrity Pillars -->
+<section class="pillars-section">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-badge">Our Approach</span>
+      <h2 class="section-heading">Information you can trust</h2>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <h4>Official Crime Context</h4>
+        <p>
+          Derived from published Kerala Police State Crime Records Bureau (SCRB) reports across all 14 revenue districts, focusing specifically on public space incidents.
+        </p>
+      </div>
+
+      <div class="pillar-card">
+        <h4>Temporal Considerations</h4>
+        <p>
+          Recognizes that the same bus stop or street corner feels fundamentally different at 2:00 PM versus 10:30 PM due to transit frequency and open shops.
+        </p>
+      </div>
+
+      <div class="pillar-card">
+        <h4>Confirmed Facilities</h4>
+        <p>
+          Displays verified police station coordinates and helpline numbers so you always know where immediate assistance is located.
+        </p>
+      </div>
+    </div>
+
+    <!-- Ready Banner -->
+    <div class="ready-banner">
+      <div class="ready-content">
+        <h3>Ready to plan your trip?</h3>
+        <p>Check any route in Kerala in under 30 seconds.</p>
+      </div>
+      <a href="{{ url_for('plan') }}" class="btn-primary">Check Route Now &rarr;</a>
     </div>
   </div>
 </section>

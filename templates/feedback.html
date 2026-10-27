@@ -1,0 +1,307 @@
+{% extends "base.html" %}
+
+{% block title %}Share Your Experience – SHE SHIELD{% endblock %}
+
+{% block content %}
+<div class="feedback-page">
+  <div class="container feedback-container">
+    <div class="feedback-header">
+      <span class="section-badge">Community Insights</span>
+      <h1 class="page-title">Share Your Travel Experience</h1>
+      <p class="page-subtitle">
+        Help build a more realistic understanding of women's travel conditions across Kerala. 
+        Your feedback is completely anonymous and requires no personal information or account registration.
+      </p>
+    </div>
+
+    <!-- Feedback Submission Card -->
+    <div class="card feedback-card" id="feedback-card">
+      <form id="feedback-form" autocomplete="off">
+        
+        <!-- 1. Approximate Location -->
+        <div class="form-group">
+          <label for="feedback-location" class="form-label">
+            Approximate Travel Location <span class="req-star">*</span>
+          </label>
+          <input 
+            type="text" 
+            id="feedback-location" 
+            class="text-input" 
+            placeholder="e.g. Aluva Metro Station, Ernakulam South, Chengannur Bus Stand..." 
+            required
+            maxlength="120"
+          >
+          <span class="field-hint">Enter the town, transit stop, or locality you visited.</span>
+        </div>
+
+        <!-- 2. Broad Travel Time Category -->
+        <div class="form-group">
+          <label class="form-label">
+            Time of Travel <span class="req-star">*</span>
+          </label>
+          <div class="radio-pill-group">
+            <label class="radio-pill">
+              <input type="radio" name="time_category" value="Morning" required>
+              <span>Morning (6 AM &ndash; 12 PM)</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="time_category" value="Afternoon">
+              <span>Afternoon (12 PM &ndash; 5 PM)</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="time_category" value="Evening" checked>
+              <span>Evening (5 PM &ndash; 9 PM)</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="time_category" value="Late night">
+              <span>Late night (9 PM &ndash; 6 AM)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 3. Reported Comfort Level -->
+        <div class="form-group">
+          <label class="form-label">
+            How comfortable did you feel? <span class="req-star">*</span>
+          </label>
+          <div class="comfort-rating-grid">
+            <label class="comfort-option opt-comfortable">
+              <input type="radio" name="comfort_level" value="Comfortable" required>
+              <div class="comfort-box">
+                <span class="comfort-indicator">&#9679;</span>
+                <span class="comfort-title">Comfortable</span>
+                <span class="comfort-sub">Felt at ease throughout</span>
+              </div>
+            </label>
+
+            <label class="comfort-option opt-mostly">
+              <input type="radio" name="comfort_level" value="Mostly comfortable">
+              <div class="comfort-box">
+                <span class="comfort-indicator">&#9679;</span>
+                <span class="comfort-title">Mostly Comfortable</span>
+                <span class="comfort-sub">General ease, minor caution</span>
+              </div>
+            </label>
+
+            <label class="comfort-option opt-somewhat">
+              <input type="radio" name="comfort_level" value="Somewhat uncomfortable">
+              <div class="comfort-box">
+                <span class="comfort-indicator">&#9679;</span>
+                <span class="comfort-title">Somewhat Uncomfortable</span>
+                <span class="comfort-sub">Felt uneasy or cautious</span>
+              </div>
+            </label>
+
+            <label class="comfort-option opt-uncomfortable">
+              <input type="radio" name="comfort_level" value="Very uncomfortable">
+              <div class="comfort-box">
+                <span class="comfort-indicator">&#9679;</span>
+                <span class="comfort-title">Very Uncomfortable</span>
+                <span class="comfort-sub">Felt unsafe or distressed</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- 4. Contributing Factors (Multi-select) -->
+        <div class="form-group">
+          <label class="form-label">
+            Which factors influenced your experience? (Select all that apply)
+          </label>
+          <div class="checkbox-tag-grid">
+            <label class="checkbox-tag">
+              <input type="checkbox" name="factors" value="Street lighting">
+              <span>Street lighting</span>
+            </label>
+            <label class="checkbox-tag">
+              <input type="checkbox" name="factors" value="Crowd levels">
+              <span>Crowd levels</span>
+            </label>
+            <label class="checkbox-tag">
+              <input type="checkbox" name="factors" value="Public transport availability">
+              <span>Public transport availability</span>
+            </label>
+            <label class="checkbox-tag">
+              <input type="checkbox" name="factors" value="Availability of help">
+              <span>Availability of help / police</span>
+            </label>
+            <label class="checkbox-tag">
+              <input type="checkbox" name="factors" value="Road and pedestrian conditions">
+              <span>Road & pedestrian paths</span>
+            </label>
+            <label class="checkbox-tag">
+              <input type="checkbox" name="factors" value="Unwanted attention or harassment">
+              <span>Unwanted attention / harassment</span>
+            </label>
+            <label class="checkbox-tag">
+              <input type="checkbox" name="factors" value="Other">
+              <span>Other factors</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 5. Would you choose this route again? -->
+        <div class="form-group">
+          <label class="form-label">
+            Would you choose this route or location again? (Optional)
+          </label>
+          <div class="radio-pill-group">
+            <label class="radio-pill">
+              <input type="radio" name="would_revisit" value="Yes">
+              <span>Yes, without hesitation</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="would_revisit" value="Maybe">
+              <span>Only with company or daylight</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="would_revisit" value="No">
+              <span>No, prefer alternatives</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 6. Optional Comments -->
+        <div class="form-group">
+          <label for="feedback-comments" class="form-label">
+            Additional Observations (Optional)
+          </label>
+          <textarea 
+            id="feedback-comments" 
+            class="text-input textarea-input" 
+            rows="3" 
+            placeholder="Share any specific observations, e.g. well-lit bus shelter, deserted underpass, active shopkeeper presence..."
+            maxlength="1000"
+          ></textarea>
+          <span class="field-hint">Max 1000 characters. Please avoid sharing personal identities.</span>
+        </div>
+
+        <!-- Submit Button & Feedback Status -->
+        <div class="feedback-action-row">
+          <button type="submit" class="btn-primary" id="feedback-submit-btn">
+            <span>Submit Travel Feedback</span>
+          </button>
+          <div id="feedback-alert" class="feedback-alert" style="display: none;"></div>
+        </div>
+      </form>
+
+      <!-- Transparency & Privacy Note -->
+      <div class="feedback-privacy-note">
+        <p>
+          <strong>Privacy & Responsible Presentation:</strong> Submitted feedback is stored anonymously for future research and transit analysis. It is kept separate from our core advisory model and is never used to automatically brand any neighbourhood as dangerous or safe without controlled validation.
+        </p>
+      </div>
+    </div>
+
+    <!-- Success Confirmation State (Hidden initially) -->
+    <div class="card feedback-card success-card" id="feedback-success-card" style="display: none;">
+      <div class="success-icon">&#10004;</div>
+      <h2>Thank you for contributing</h2>
+      <p class="success-message" id="success-message-text">
+        Your travel experience has been recorded securely and anonymously.
+      </p>
+      <div class="success-actions">
+        <a href="{{ url_for('plan') }}" class="btn-primary">Plan a New Journey &rarr;</a>
+        <button type="button" class="btn-secondary" id="submit-another-btn">Submit Another Record</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById("feedback-form");
+  const submitBtn = document.getElementById("feedback-submit-btn");
+  const alertBox = document.getElementById("feedback-alert");
+  const formCard = document.getElementById("feedback-card");
+  const successCard = document.getElementById("feedback-success-card");
+  const submitAnotherBtn = document.getElementById("submit-another-btn");
+
+  if (!form) return;
+
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const location = document.getElementById("feedback-location").value.trim();
+    const timeRadio = document.querySelector('input[name="time_category"]:checked');
+    const comfortRadio = document.querySelector('input[name="comfort_level"]:checked');
+    const revisitRadio = document.querySelector('input[name="would_revisit"]:checked');
+    const comments = document.getElementById("feedback-comments").value.trim();
+
+    const factorCheckboxes = document.querySelectorAll('input[name="factors"]:checked');
+    const factors = Array.from(factorCheckboxes).map(cb => cb.value);
+
+    if (!location) {
+      showAlert("Please enter an approximate travel location.", "error");
+      return;
+    }
+    if (!timeRadio) {
+      showAlert("Please select a travel time category.", "error");
+      return;
+    }
+    if (!comfortRadio) {
+      showAlert("Please select a reported comfort level.", "error");
+      return;
+    }
+
+    const payload = {
+      location: location,
+      time_category: timeRadio.value,
+      comfort_level: comfortRadio.value,
+      factors: factors,
+      comments: comments,
+      would_revisit: revisitRadio ? revisitRadio.value : ""
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = "<span>Submitting feedback...</span>";
+    showAlert("", "");
+
+    try {
+      const resp = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await resp.json();
+
+      if (resp.ok && data.success) {
+        formCard.style.display = "none";
+        successCard.style.display = "block";
+        if (data.result && data.result.message) {
+          document.getElementById("success-message-text").innerText = data.result.message;
+        }
+      } else {
+        showAlert(data.error || "Submission could not be completed. Please try again.", "error");
+      }
+    } catch (err) {
+      console.error("Feedback submission error:", err);
+      showAlert("Network error. Please verify your connection and try again.", "error");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = "<span>Submit Travel Feedback</span>";
+    }
+  });
+
+  if (submitAnotherBtn) {
+    submitAnotherBtn.addEventListener("click", function() {
+      form.reset();
+      successCard.style.display = "none";
+      formCard.style.display = "block";
+    });
+  }
+
+  function showAlert(msg, type) {
+    if (!msg) {
+      alertBox.style.display = "none";
+      return;
+    }
+    alertBox.className = "feedback-alert alert-" + type;
+    alertBox.innerText = msg;
+    alertBox.style.display = "block";
+  }
+});
+</script>
+{% endblock %}

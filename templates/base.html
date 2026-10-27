@@ -3,19 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}SHE SHIELD – Women Travel Safety & Comfort Index{% endblock %}</title>
+  <title>{% block title %}SHE SHIELD – Travel with Greater Awareness{% endblock %}</title>
   
-  <!-- Meta tags for civic technology academic project -->
-  <meta name="description" content="SHE SHIELD is a data-driven pre-travel safety and comfort advisory system for women travellers in Kerala, integrating genuine police crime statistics, emergency proximity, and machine learning.">
-  <meta name="author" content="College of Engineering Chengannur (CEC)">
+  <meta name="description" content="SHE SHIELD is a calm, data-informed travel advisory platform for women travelling in Kerala, integrating official district crime statistics and verified emergency infrastructure.">
   
   <!-- Leaflet CSS for Interactive Map -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   
-  <!-- Google Fonts: Inter -->
+  <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Project CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -24,25 +22,24 @@
 <body>
 
   <!-- Navigation Bar -->
-  <header>
+  <header class="site-header">
     <nav class="navbar" id="main-nav">
-      <a href="{{ url_for('index') }}" class="brand-container" id="nav-brand-link">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="SHE SHIELD Logo" class="brand-logo" onerror="this.style.display='none'">
-        <div>
-          <span class="brand-text">SHE SHIELD</span>
-          <span class="brand-badge">Academic Advisory</span>
-        </div>
+      <a href="{{ url_for('index') }}" class="brand-link" id="nav-brand-link">
+        <span class="brand-name">SHE SHIELD</span>
+        <span class="brand-tagline">Travel with greater awareness</span>
       </a>
 
-      <button class="mobile-toggle" id="mobile-toggle-btn" aria-label="Toggle navigation">☰</button>
+      <button class="mobile-toggle" id="mobile-toggle-btn" aria-label="Toggle navigation">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
 
       <ul class="nav-links" id="nav-links-menu">
-        <li><a href="{{ url_for('index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}" id="nav-home">Home</a></li>
-        <li><a href="{{ url_for('plan') }}" class="{% if request.endpoint == 'plan' %}active{% endif %}" id="nav-plan">Plan Journey</a></li>
-        <li><a href="{{ url_for('methodology') }}" class="{% if request.endpoint == 'methodology' %}active{% endif %}" id="nav-methodology">Data & Methodology</a></li>
-        <li><a href="{{ url_for('about') }}" class="{% if request.endpoint == 'about' %}active{% endif %}" id="nav-about">About Us</a></li>
-        <li><a href="{{ url_for('contact') }}" class="{% if request.endpoint == 'contact' %}active{% endif %}" id="nav-contact">Helplines & Contact</a></li>
-        <li><a href="{{ url_for('plan') }}" class="nav-cta" id="nav-cta-btn">Quick Advisory</a></li>
+        <li><a href="{{ url_for('index') }}" class="nav-item {% if request.endpoint == 'index' %}active{% endif %}" id="nav-home">Home</a></li>
+        <li><a href="{{ url_for('plan') }}" class="nav-item {% if request.endpoint == 'plan' %}active{% endif %}" id="nav-plan">Plan a Journey</a></li>
+        <li><a href="{{ url_for('share_experience') }}" class="nav-item {% if request.endpoint in ['share_experience', 'feedback'] %}active{% endif %}" id="nav-feedback">Share Your Experience</a></li>
+        <li><a href="{{ url_for('plan') }}" class="nav-action-btn" id="nav-action-btn">Check a Route &rarr;</a></li>
       </ul>
     </nav>
   </header>
@@ -52,50 +49,47 @@
     {% block content %}{% endblock %}
   </main>
 
-  <!-- Global Footer -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-brand">
-        <h4>🛡️ SHE SHIELD</h4>
-        <p>
-          A machine-learning and data-backed Women Travel Safety & Comfort Index and Advisory System.
-          Developed as a Sixth Semester B.Tech Mini Project at the Department of Computer Engineering, 
-          <strong>College of Engineering Chengannur (CEC)</strong>, affiliated with APJ Abdul Kalam Technological University (KTU).
+  <!-- Minimal, Professional Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-column brand-col">
+        <div class="footer-logo">SHE SHIELD</div>
+        <p class="footer-desc">
+          A proactive travel advisory platform designed to help women navigate Kerala with situational awareness, verified regional crime context, and direct emergency contacts.
         </p>
-        <p style="margin-top: 10px; font-size: 12px; color: var(--gold-light);">
-          * Disclaimer: Pre-travel decision-support system. Not an emergency response dispatch service.
+        <p class="footer-helpline-highlight">
+          Emergency: <strong>112</strong> &bull; Women Helpline: <strong>1091</strong> &bull; Pink Police: <strong>1515</strong>
         </p>
       </div>
 
-      <div class="footer-links">
-        <h5>Navigation</h5>
-        <ul>
+      <div class="footer-column">
+        <h4 class="footer-heading">Navigation</h4>
+        <ul class="footer-nav">
           <li><a href="{{ url_for('index') }}">Home</a></li>
-          <li><a href="{{ url_for('plan') }}">Plan Journey</a></li>
-          <li><a href="{{ url_for('methodology') }}">Methodology & Crime Data</a></li>
-          <li><a href="{{ url_for('about') }}">Academic Context</a></li>
-          <li><a href="{{ url_for('contact') }}">Helplines Directory</a></li>
+          <li><a href="{{ url_for('plan') }}">Plan a Journey</a></li>
+          <li><a href="{{ url_for('share_experience') }}">Share Your Experience</a></li>
         </ul>
       </div>
 
-      <div class="footer-links">
-        <h5>Emergency Helplines</h5>
-        <ul>
-          <li><span style="color:var(--gold-primary);">112</span> &ndash; National Emergency</li>
-          <li><span style="color:var(--gold-primary);">1091</span> &ndash; Women Helpline</li>
-          <li><span style="color:var(--gold-primary);">1515</span> &ndash; Kerala Pink Police</li>
-          <li><span style="color:var(--gold-primary);">181</span> &ndash; Women in Distress</li>
-          <li><span style="color:var(--gold-primary);">1930</span> &ndash; Cyber Crime Helpline</li>
+      <div class="footer-column">
+        <h4 class="footer-heading">Emergency Helplines (Kerala)</h4>
+        <ul class="footer-nav">
+          <li><span>Police Control Room: <strong>112</strong></span></li>
+          <li><span>Women Helpline: <strong>1091</strong></span></li>
+          <li><span>Pink Police Patrol: <strong>1515</strong></span></li>
+          <li><span>Women in Distress (Mitra): <strong>181</strong></span></li>
         </ul>
       </div>
     </div>
 
-    <div class="footer-bottom">
-      <div>
-        &copy; 2026 SHE SHIELD &bull; Alina Anna Eappen, Athira Anil, Sreya Akku Shajan, Nair Ardra Santhosh
-      </div>
-      <div>
-        Guided by: Smt. Santhy Viswam, Assistant Professor, Dept. of Computer Engineering, CEC
+    <div class="footer-legal">
+      <div class="legal-inner">
+        <p class="disclaimer-text">
+          <strong>Notice:</strong> SHE SHIELD provides pre-travel informational guidance derived from official Kerala Police SCRB statistics and public transit observations. It is not an emergency response service or personal security guarantee. Always dial 112 in immediate danger.
+        </p>
+        <p class="copyright-text">
+          &copy; 2026 SHE SHIELD. All rights reserved.
+        </p>
       </div>
     </div>
   </footer>
@@ -108,24 +102,12 @@
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
   <script>
-    // Mobile navigation toggle
+    // Responsive Mobile navigation toggle
     const toggleBtn = document.getElementById('mobile-toggle-btn');
     const navMenu = document.getElementById('nav-links-menu');
     if (toggleBtn && navMenu) {
       toggleBtn.addEventListener('click', () => {
-        if (navMenu.style.display === 'flex') {
-          navMenu.style.display = 'none';
-        } else {
-          navMenu.style.display = 'flex';
-          navMenu.style.flexDirection = 'column';
-          navMenu.style.position = 'absolute';
-          navMenu.style.top = '100%';
-          navMenu.style.left = '0';
-          navMenu.style.right = '0';
-          navMenu.style.background = '#0c0a17';
-          navMenu.style.padding = '20px';
-          navMenu.style.borderBottom = '1px solid #d4af37';
-        }
+        navMenu.classList.toggle('open');
       });
     }
   </script>

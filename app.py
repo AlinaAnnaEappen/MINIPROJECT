@@ -7,6 +7,7 @@ from services.geocoding_service import geocoder
 from services.crime_data_service import crime_service
 from services.osm_service import osm_service
 from services.advisory_engine import advisory_engine
+from services.feedback_service import feedback_service
 
 app = Flask(__name__)
 CORS(app)
@@ -21,6 +22,11 @@ def index():
 @app.route('/plan')
 def plan():
     return render_template('plan.html')
+
+@app.route('/share-experience')
+@app.route('/feedback')
+def share_experience():
+    return render_template('feedback.html')
 
 @app.route('/methodology')
 def methodology():
@@ -37,6 +43,41 @@ def contact():
 # =====================================================================
 # REST API Endpoints
 # =====================================================================
+
+@app.route('/api/feedback', methods=['POST'])
+def submit_feedback():
+    """
+    Submits user travel experience feedback.
+    Saves anonymously to persistent SQLite database for research.
+    Does NOT retrain machine learning models.
+    """
+    data = request.get_json(silent=True) or {}
+    success, result = feedback_service.validate_and_save(data)
+    if not success:
+        return jsonify({"success": False, "error": result}), 400
+    return jsonify({"success": True, "result": result}), 201
+
+@app.route('/api/admin/feedback', methods=['GET'])
+def admin_feedback():
+    """
+    Private developer-only inspection endpoint.
+    Protected by simple dev token check or local host access.
+    """
+    token = request.args.get('token', '')
+    is_local = request.remote_addr in ['127.0.0.1', '::1', 'localhost']
+    if token != 'she_shield_dev_2026' and not is_local:
+        return jsonify({"error": "Unauthorized access."}), 403
+
+    limit = min(int(request.args.get('limit', 50)), 200)
+    records = feedback_service.get_records(limit=limit)
+    stats = feedback_service.get_summary_stats()
+    return jsonify({
+        "success": True,
+        "total_records": len(records),
+        "stats": stats,
+        "records": records
+    })
+
 
 @app.route('/api/health', methods=['GET'])
 def health():

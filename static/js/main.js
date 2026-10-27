@@ -1,64 +1,64 @@
-// SHE SHIELD - Main Client Application Logic
+/**
+ * SHE SHIELD – Main Client Controller
+ * Handles location autocomplete, journey planning form submission,
+ * and clean advisory rendering.
+ */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
+  const planForm = document.getElementById("plan-form");
   const locationInput = document.getElementById("location-input");
   const dateInput = document.getElementById("date-input");
   const timeInput = document.getElementById("time-input");
-  const planForm = document.getElementById("plan-form");
-  const submitBtn = document.getElementById("submit-btn");
   const autocompleteList = document.getElementById("autocomplete-list");
+  const submitBtn = document.getElementById("submit-btn");
   const resultsContainer = document.getElementById("results-container");
 
-  // Pre-fill today's date if empty
+  // 1. Initialize default date to today and time to 21:30 (night default)
   if (dateInput && !dateInput.value) {
     const today = new Date().toISOString().split("T")[0];
     dateInput.value = today;
   }
 
-  // Pre-fill default time if empty (current local time)
   if (timeInput && !timeInput.value) {
-    const now = new Date();
-    const hh = String(now.getHours()).padStart(2, "0");
-    const mm = String(now.getMinutes()).padStart(2, "0");
-    timeInput.value = `${hh}:${mm}`;
+    timeInput.value = "21:30";
   }
 
-  // 1. Time Preset Chips
-  const timeChips = document.querySelectorAll(".chip-btn");
-  timeChips.forEach(chip => {
-    chip.addEventListener("click", () => {
-      timeChips.forEach(c => c.classList.remove("active"));
-      chip.classList.add("active");
-      const chosenTime = chip.getAttribute("data-time");
-      if (chosenTime && timeInput) {
-        timeInput.value = chosenTime;
+  // Preset time buttons
+  const timeChips = document.querySelectorAll(".time-presets .preset-btn");
+  timeChips.forEach(btn => {
+    btn.addEventListener("click", () => {
+      timeChips.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      if (timeInput) {
+        timeInput.value = btn.getAttribute("data-time");
       }
     });
   });
 
-  // 2. Autocomplete Suggestions
-  let debounceTimer = null;
+  // 2. Autocomplete location search
+  let debounceTimeout = null;
   if (locationInput && autocompleteList) {
-    locationInput.addEventListener("input", (e) => {
-      clearTimeout(debounceTimer);
-      const query = e.target.value.trim();
+    locationInput.addEventListener("input", function () {
+      const query = this.value.trim();
+      clearTimeout(debounceTimeout);
+
       if (query.length < 2) {
         autocompleteList.innerHTML = "";
         autocompleteList.style.display = "none";
         return;
       }
 
-      debounceTimer = setTimeout(async () => {
+      debounceTimeout = setTimeout(async () => {
         try {
           const res = await fetch(`/api/autocomplete?q=${encodeURIComponent(query)}`);
           if (res.ok) {
             const data = await res.json();
             renderAutocomplete(data.matches || []);
           }
-        } catch (err) {
-          console.warn("Autocomplete fetch failed:", err);
+        } catch (e) {
+          console.error("Autocomplete error:", e);
         }
-      }, 200);
+      }, 150);
     });
 
     document.addEventListener("click", (e) => {
@@ -75,14 +75,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     autocompleteList.innerHTML = items.map(item => `
-      <li class="autocomplete-item" data-name="${item.name}">
-        <span>📍 <strong>${item.name}</strong></span>
-        <span class="dist-badge">${item.district}</span>
+      <li class="autocomplete-entry" data-name="${item.name}">
+        <span class="entry-name">${item.name}</span>
+        <span class="entry-district">${item.district}</span>
       </li>
     `).join("");
     autocompleteList.style.display = "block";
 
-    autocompleteList.querySelectorAll(".autocomplete-item").forEach(el => {
+    autocompleteList.querySelectorAll(".autocomplete-entry").forEach(el => {
       el.addEventListener("click", () => {
         locationInput.value = el.getAttribute("data-name");
         autocompleteList.style.display = "none";
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
           updateMap(data.result.location, data.result.nearby_police_stations);
         }
       } catch (err) {
-        console.error("Advisory error:", err);
+        console.error("Advisory calculation error:", err);
         alert("Server communication error. Please try again.");
       } finally {
         setLoading(false);
@@ -136,10 +136,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!submitBtn) return;
     if (isLoading) {
       submitBtn.disabled = true;
-      submitBtn.innerHTML = `<span>⏳ Evaluating verified safety metrics...</span>`;
+      submitBtn.innerHTML = `<span>Evaluating regional data & facilities...</span>`;
     } else {
       submitBtn.disabled = false;
-      submitBtn.innerHTML = `<span>🛡️ Assess Travel Safety & Comfort</span>`;
+      submitBtn.innerHTML = `<span>Generate Travel Advisory</span>`;
     }
   }
 
@@ -150,141 +150,132 @@ document.addEventListener("DOMContentLoaded", () => {
     const loc = res.location;
     const sch = res.travel_schedule;
     const crime = res.crime_context;
+    const stn = res.nearest_police_station;
 
-    const badgeClass = adv.badge_color === "safe" ? "badge-safe" :
-                       adv.badge_color === "cautious" ? "badge-cautious" : "badge-unsafe";
-    const scoreColorClass = adv.badge_color === "safe" ? "score-safe" :
-                            adv.badge_color === "cautious" ? "score-cautious" : "score-unsafe";
+    const statusBadgeClass = adv.badge_color === "safe" ? "status-safe" :
+                             adv.badge_color === "cautious" ? "status-cautious" : "status-elevated";
 
     resultsContainer.innerHTML = `
-      <!-- 1. Advisory Banner -->
-      <div class="advisory-badge-card ${badgeClass}">
-        <div class="advisory-title-group">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-            <span style="font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold-primary);font-weight:700;">
-              Pre-Travel Assessment
-            </span>
-            <span style="font-size:11px;background:rgba(255,255,255,0.1);padding:2px 8px;border-radius:12px;">
-              ${loc.district_name} District
-            </span>
+      <!-- Advisory Overview Banner -->
+      <div class="card result-card ${statusBadgeClass}">
+        <div class="advisory-top-bar">
+          <div>
+            <span class="advisory-location-tag">${loc.district_name} District &bull; ${loc.name}</span>
+            <h2 class="advisory-category">${adv.category}</h2>
           </div>
-          <h3>${adv.category}</h3>
-          <p>${adv.summary}</p>
+          <div class="score-pill">
+            <span class="score-val">${adv.score}</span>
+            <span class="score-label">Index Score</span>
+          </div>
         </div>
-        <div class="score-display">
-          <div class="score-number ${scoreColorClass}">${adv.score}</div>
-          <div class="score-denom">/100</div>
-        </div>
+        <p class="advisory-summary">${adv.summary}</p>
       </div>
 
-      <!-- 2. Actionable Recommendations -->
-      <div class="glass-card">
-        <h4 style="font-size:17px;font-weight:700;color:#fff;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
-          <span>💡</span> Recommended Travel Precautions
-        </h4>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+      <!-- Actionable Travel Guidance -->
+      <div class="card guidance-card">
+        <h3 class="card-heading">Practical Travel Guidance</h3>
+        <ul class="guidance-list">
           ${adv.recommendations.map(r => `
-            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14.5px;color:#e2e8f0;">
-              <span style="color:var(--gold-primary);font-weight:bold;">✔</span>
+            <li>
+              <span class="guidance-bullet">&#10003;</span>
               <span>${r}</span>
             </li>
           `).join("")}
         </ul>
       </div>
 
-      <!-- 3. Indicators Grid -->
-      <div class="indicator-grid">
-        ${adv.contributing_factors.map(f => `
-          <div class="indicator-card">
-            <div class="indicator-header">
-              <span>${f.factor}</span>
-              <span class="indicator-score">${f.score}/100</span>
-            </div>
-            <div class="indicator-bar">
-              <div class="indicator-fill" style="width:${f.score}%;background:${
-                f.score >= 75 ? 'var(--safe-green)' : f.score >= 50 ? 'var(--cautious-yellow)' : 'var(--unsafe-red)'
-              }"></div>
-            </div>
-            <div class="indicator-detail">${f.detail}</div>
-          </div>
-        `).join("")}
-      </div>
-
-      <!-- 4. Verified Official Crime Context -->
+      <!-- Verified District Crime Context -->
       ${crime ? `
-        <div class="glass-card" style="border-left:4px solid var(--cyan-accent);">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
-            <h4 style="font-size:16px;color:#fff;display:flex;align-items:center;gap:8px;">
-              <span>📊</span> Official Crime Context (${crime.district} District)
-            </h4>
-            <span style="font-size:11px;color:var(--cyan-accent);border:1px solid rgba(56,189,248,0.3);padding:2px 8px;border-radius:12px;">
-              Kerala Police SCRB Verified
-            </span>
+        <div class="card crime-context-card">
+          <div class="crime-header-flex">
+            <div>
+              <h3 class="card-heading">Regional Crime Context (${crime.district} District)</h3>
+              <p class="crime-subhead">Official Kerala Police State Crime Records Bureau (SCRB)</p>
+            </div>
+            <span class="data-tag">Verified SCRB Data</span>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(160px,1fr));gap:16px;margin-bottom:12px;">
-            <div style="background:rgba(0,0,0,0.3);padding:12px;border-radius:8px;">
-              <span style="font-size:11px;color:var(--text-muted);display:block;">Latest Annual Total</span>
-              <strong style="font-size:18px;color:#fff;">${crime.latest_annual_crimes.toLocaleString()} cases</strong>
+
+          <div class="crime-stats-row">
+            <div class="stat-box">
+              <span class="stat-num">${crime.latest_annual_crimes.toLocaleString()}</span>
+              <span class="stat-caption">Annual Reported Crimes</span>
             </div>
-            <div style="background:rgba(0,0,0,0.3);padding:12px;border-radius:8px;">
-              <span style="font-size:11px;color:var(--text-muted);display:block;">Rate per Lakh Females</span>
-              <strong style="font-size:18px;color:var(--gold-primary);">${crime.rate_per_lakh_females}</strong>
+            <div class="stat-box">
+              <span class="stat-num">${crime.rate_per_lakh_females}</span>
+              <span class="stat-caption">Per Lakh Females</span>
             </div>
-            <div style="background:rgba(0,0,0,0.3);padding:12px;border-radius:8px;">
-              <span style="font-size:11px;color:var(--text-muted);display:block;">Public Space Crimes Rate</span>
-              <strong style="font-size:18px;color:#fff;">${crime.public_space_crime_rate} / lakh</strong>
+            <div class="stat-box">
+              <span class="stat-num">${crime.public_space_crime_rate}</span>
+              <span class="stat-caption">Public Space Rate</span>
             </div>
-            <div style="background:rgba(0,0,0,0.3);padding:12px;border-radius:8px;">
-              <span style="font-size:11px;color:var(--text-muted);display:block;">State Risk Bracket</span>
-              <strong style="font-size:18px;color:#fff;">${crime.relative_risk_category}</strong>
+            <div class="stat-box">
+              <span class="stat-num">${crime.relative_risk_category}</span>
+              <span class="stat-caption">Statewide Benchmark</span>
             </div>
           </div>
-          <p style="font-size:12px;color:var(--text-dim);margin:0;">
-            Source: Kerala Police Crime Against Women Portal & NCRB. 
-            Statistics reflect administrative district totals; they provide broad regional context and must not be interpreted as street-level incident predictions.
+          <p class="crime-disclaimer-note">
+            Statistics represent administrative district totals to establish broad regional context. They do not predict individual incidents at specific street corners.
           </p>
         </div>
       ` : ''}
 
-      <!-- 5. Nearby Mapped Police Stations -->
-      <div class="glass-card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <h4 style="font-size:16px;color:#fff;display:flex;align-items:center;gap:8px;">
-            <span>🛡️</span> Nearby Mapped Police Stations
-          </h4>
-          <span style="font-size:12px;color:var(--text-muted);">
-            Emergency Call Button Active
-          </span>
+      <!-- Nearby Mapped Police Stations -->
+      <div class="card police-stations-card">
+        <div class="card-header-flex">
+          <div>
+            <h3 class="card-heading">Nearest Police Stations</h3>
+            <p class="card-subhead">Confirmed facility locations with direct telephone lines</p>
+          </div>
+          <span class="data-tag">Direct Emergency Access</span>
         </div>
-        <div class="ps-list">
+
+        <div class="station-list">
           ${res.nearby_police_stations.map(ps => `
-            <div class="ps-item">
-              <div class="ps-info">
-                <h5>${ps.name} ${ps.is_women_cell ? '<span style="color:#ec4899;font-size:11px;">(Women Cell)</span>' : ''}</h5>
-                <p>📍 ${ps.district} District &bull; ${ps.jurisdiction_type} &bull; <strong>${ps.distance_km} km away</strong></p>
+            <div class="station-row">
+              <div class="station-details">
+                <h4 class="station-name">
+                  ${ps.name}
+                  ${ps.is_women_cell ? '<span class="women-cell-tag">Women Desk</span>' : ''}
+                </h4>
+                <p class="station-meta">
+                  ${ps.district} District &bull; <strong>${ps.distance_km} km away</strong>
+                </p>
               </div>
-              <div class="ps-action">
-                <a href="tel:${ps.phone}">📞 Call Station</a>
+              <div class="station-dialer">
+                <a href="tel:${ps.phone}" class="btn-call">
+                  <span>Call ${ps.phone}</span>
+                </a>
               </div>
             </div>
           `).join("")}
         </div>
-        <p style="font-size:11.5px;color:var(--text-dim);margin-top:12px;">
-          * Note: Mapped stations show confirmed facility locations and linear proximity. In Kerala, jurisdiction is defined by designated police station areas, not purely by nearest geographic point.
+        <p class="station-note">
+          Mapped stations reflect geographic proximity. In Kerala, official response is governed by designated jurisdictional boundaries.
         </p>
       </div>
     `;
 
-    // Scroll gently to results
+    // Smooth scroll to results
     resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  // Auto trigger default location on /plan load (Chengannur)
-  if (planForm && locationInput && !locationInput.value) {
-    locationInput.value = "Chengannur";
-    // Trigger planForm submit after a brief delay so map is ready
+  // 4. Handle pre-filled query parameter from URL (e.g. ?q=Kochi from Home page)
+  const urlParams = new URLSearchParams(window.location.search);
+  const qParam = urlParams.get('q');
+  if (qParam && locationInput) {
+    locationInput.value = qParam;
     setTimeout(() => {
-      planForm.dispatchEvent(new Event("submit"));
-    }, 400);
+      if (planForm) {
+        planForm.dispatchEvent(new Event("submit"));
+      }
+    }, 350);
+  } else if (planForm && locationInput && !locationInput.value) {
+    // Default initial query: Chengannur
+    locationInput.value = "Chengannur";
+    setTimeout(() => {
+      if (planForm) {
+        planForm.dispatchEvent(new Event("submit"));
+      }
+    }, 350);
   }
 });
